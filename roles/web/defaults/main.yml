@@ -1,6 +1,6 @@
 
 # defaults file for web
-docker_image_name: "dungxbuns/vdt-lab-frontend:v5"
+docker_image_name: "dungxbuns/vdt-lab-frontend:v6"
 container_name: "vdt-lab-frontend"
 REACT_LOCAL_PORT: "8888"
 REACT_DOCKER_PORT: "80"
