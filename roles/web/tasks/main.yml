@@ -5,7 +5,7 @@
     name: "{{ docker_image_name }}"
     source: pull
 
-- name: Create docker network1
+- name: Create docker network1 {{ansible_ssh_host}}
   docker_network:
     name: "{{ docker_network_frontend }}"
     state: present

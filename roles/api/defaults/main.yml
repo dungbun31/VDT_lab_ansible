@@ -1,6 +1,6 @@
 ---
 # defaults file for api
-docker_image_name: "dungxbuns/vdt-lab-backend:v5"
+docker_image_name: "dungxbuns/vdt-lab-backend:v6"
 container_name: "vdt-lab-backend"
 NODE_LOCAL_PORT: "6868"
 NODE_DOCKER_PORT: "8080"
@@ -11,4 +11,4 @@ DB_USER: "postgres"
 DB_PASS: "bun"
 DB_NAME: "students"
 DB_HOST: "db"
-CLIENT_ORIGIN: "http://192.168.11.140:8888"
+CLIENT_ORIGIN: "http://{{ hostvars['app-server-1']['ansible_ssh_host'] }}:8888"

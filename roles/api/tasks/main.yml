@@ -1,6 +1,6 @@
 ---
 # tasks file for api
-- name: Pull Docker image
+- name: Pull Docker image {{ hostvars['app-server-1']['ansible_ssh_host'] }}
   docker_image:
     name: "{{ docker_image_name }}"
     source: pull
