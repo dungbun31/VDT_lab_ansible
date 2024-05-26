@@ -1,0 +1,20 @@
+---
+- name: Install docker and docker-compose
+  hosts: 
+    - webservers
+  become: true
+  roles:
+    - docker
+
+- name: Web servers setup
+  hosts: webservers
+  become: true
+  roles:
+    - web
+
+- name: Database server and API setup
+  hosts: webservers
+  become: true
+  roles:
+    - api
+    - db

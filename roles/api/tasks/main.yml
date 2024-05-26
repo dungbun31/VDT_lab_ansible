@@ -1,0 +1,35 @@
+---
+# tasks file for api
+- name: Pull Docker image
+  docker_image:
+    name: "{{ docker_image_name }}"
+    source: pull
+
+- name: Create docker network1
+  docker_network:
+    name: "{{ docker_network_backend }}"
+    state: present
+
+- name: Create docker network2
+  docker_network:
+    name: "{{ docker_network_frontend }}"
+    state: present
+
+    
+- name: Run container
+  docker_container:
+    name: "{{ container_name }}"
+    image: "{{ docker_image_name }}"
+    state: started
+    env:  
+      DB_HOST: "{{ DB_HOST }}"
+      DB_USER: "{{ DB_USER }}"
+      DB_PASSWORD: "{{ DB_PASS }}"
+      DB_NAME: "{{ DB_NAME }}"
+      DB_PORT: "{{ DB_PORT }}"
+      CLIENT_ORIGIN: "{{ CLIENT_ORIGIN }}"
+    ports:
+      - "{{ NODE_LOCAL_PORT }}:{{ NODE_DOCKER_PORT }}"
+    networks:
+      - name: "{{ docker_network_backend }}"
+      - name: "{{ docker_network_frontend }}"

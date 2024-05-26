@@ -1,0 +1,23 @@
+---
+# tasks file for web
+- name: Pull Docker image
+  docker_image:
+    name: "{{ docker_image_name }}"
+    source: pull
+
+- name: Create docker network1
+  docker_network:
+    name: "{{ docker_network_frontend }}"
+    state: present
+
+- name: Run container
+  docker_container:
+    name: "{{ container_name }}"
+    image: "{{ docker_image_name }}"
+    state: started
+    env:
+      REACT_APP_API_BASE_URL: "{{ CLIENT_API_BASE_URL }}"
+    ports:
+      - "{{ REACT_LOCAL_PORT }}:{{ REACT_DOCKER_PORT }}"
+    networks:
+      - name: "{{ docker_network_frontend }}"

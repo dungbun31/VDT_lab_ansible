@@ -1,0 +1,12 @@
+---
+# defaults file for db
+postgresql_image: "postgres:latest"
+postgresql_container_name: "db"
+DB_LOCAL_PORT: "5433"
+DB_PORT: "5432"
+DB_USER: "postgres"
+DB_PASS: "bun"
+DB_NAME: "students"
+DB_HOST: "db"
+docker_network_backend: "backend"
+postgresql_volume_name: "postgres_data"
