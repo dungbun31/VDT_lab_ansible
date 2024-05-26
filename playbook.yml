@@ -2,6 +2,7 @@
 - name: Install docker and docker-compose
   hosts: 
     - webservers
+    - apiservers
   become: true
   roles:
     - docker
@@ -13,7 +14,7 @@
     - web
 
 - name: Database server and API setup
-  hosts: webservers
+  hosts: apiservers
   become: true
   roles:
     - api
