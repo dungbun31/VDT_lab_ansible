@@ -1,0 +1,31 @@
+---
+# tasks file for db
+- name: Pull PostgreSQL Docker image
+  docker_image:
+    name: "{{ postgresql_image }}"
+    source: pull
+    
+- name: Create PostgreSQL data volume
+  docker_volume:
+    name: "{{ postgresql_volume_name }}"
+
+- name: Create docker docker_network1
+  docker_network:
+    name: "{{ docker_network_backend }}"
+    state: present
+
+- name: Run PostgreSQL Docker container
+  docker_container:
+    name: "{{ postgresql_container_name }}"
+    image: "{{ postgresql_image }}"
+    ports:
+      - "{{ DB_LOCAL_PORT }}:{{ DB_PORT }}"
+    volumes:
+      - "{{ postgresql_volume_name }}:/var/lib/postgresql/data"
+    env:
+      POSTGRES_USER: "{{ DB_USER }}"
+      POSTGRES_PASSWORD: "{{ DB_PASS }}"
+      POSTGRES_DB: "{{ DB_NAME }}"
+    networks:
+      - name: "{{ docker_network_backend }}"
+
